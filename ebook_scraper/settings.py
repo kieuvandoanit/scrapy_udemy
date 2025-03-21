@@ -12,9 +12,23 @@ BOT_NAME = "ebook_scraper"
 SPIDER_MODULES = ["ebook_scraper.spiders"]
 NEWSPIDER_MODULE = "ebook_scraper.spiders"
 
+# Scrapy-playwright settings
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "https": "scrapy_playwright.handler.ScrapyPlaywrightDownloadHandler",
+    "ebook_scraper.middlewares.EbookScraperDownloaderMiddleware": 543,
+}
+
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "ebook_scraper (+http://www.yourdomain.com)"
+# USER_AGENT = "ebook_scraper (+http://www.yourdomain.com)"
+
+# Downloader middlewares
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+}
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -62,9 +76,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
 #    "ebook_scraper.pipelines.EbookScraperPipeline": 300,
-#}
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -1,0 +1,5 @@
+scrapy
+ipython
+openpyxl
+pymongo[srv]
+scrapy-playwright
